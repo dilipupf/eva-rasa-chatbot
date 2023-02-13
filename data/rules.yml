@@ -1,0 +1,22 @@
+version: "3.1"
+
+rules:
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Say 'I am a bot' anytime the user challenges
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Find a person
+    steps:
+      - intent: ask_general_info_person
+      - action: action_return_general_info_person
+
+  - rule: Tell the time
+    steps:
+      - intent: inquire_time
+      - action: action_tell_time # this is the custom action which should be configured in domain.yml file

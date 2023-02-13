@@ -1,0 +1,10 @@
+[
+  {
+    "name": "person",
+    "pattern": "(\\bJorge\\b|\\bSilvia\\b)"
+  },
+  {
+    "name": "place",
+    "pattern": "(\\bamsterdam\\b|\\bseattle\\b)"
+  }
+]
