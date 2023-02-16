@@ -34,104 +34,6 @@ city_db = {
     "seattle": "US/Pacific",
 }
 
-dtic_db = [
-    {
-        "NAME": "GONZALEZ BALLESTER, MIGUEL ANGEL",
-        "GROUP ": "SIMBIOsys: Simulation, Imaging and Modelling for Biomedical Systems",
-        "OFFICE": 55105,
-    },
-    {
-        "NAME": "IVORRA CANO, ANTONIO",
-        "GROUP ": "BERG Biomedical Electronics Research Group",
-        "OFFICE": 51017,
-    },
-    {
-        "NAME": "BASEER , IRUM",
-        "GROUP ": "ITG: Interactive Technologies Group",
-        "OFFICE": 55112,
-    },
-    {
-        "NAME": "SAGGION , HORACIO",
-        "GROUP ": "Natural Language Processing",
-        "OFFICE": 55422,
-    },
-    {
-        "NAME": "GIL RODRIGUEZ, RAQUEL",
-        "GROUP ": "IP4EC\nImage processing\nfor enhanced cinematography",
-        "OFFICE": 55205,
-    },
-    {
-        "NAME": "LOBO , JORGE",
-        "GROUP ": "AI&ML: Artificial Intelligence and Machine Learning group",
-        "OFFICE": 55110,
-    },
-    {
-        "NAME": "CHAMPION COLELL, JUDITH",
-        "GROUP ": "UGA TIC Head of the Management and Administration  Unit",
-        "OFFICE": 55012,
-    },
-    {
-        "NAME": "ELADLY , AHMED FAYEZ SAAD MOHAMED ELADLY",
-        "GROUP ": "BERG Biomedical Electronics Research Group",
-        "OFFICE": 51017,
-    },
-    {
-        "NAME": "NOAILLY , JEROME BERNARD",
-        "GROUP ": "SIMBIOsys: Simulation, Imaging and Modelling for Biomedical Systems",
-        "OFFICE": 55109,
-    },
-    {
-        "NAME": "VENTAYOL BORRAS, MARIA LOURDES",
-        "GROUP ": "UGA TIC- Polytechnic School",
-        "OFFICE": 55018,
-    },
-    {
-        "NAME": "CABRERA , DAVID",
-        "GROUP ": "MTG: Music Technology Group",
-        "OFFICE": 55305,
-    },
-    {
-        "NAME": "AGENJO ASENSIO, JAVIER",
-        "GROUP ": "ITG: Interactive Technologies Group",
-        "OFFICE": 55112,
-    },
-    {
-        "NAME": "CLOTET SULE, JOANA",
-        "GROUP ": "UGA TIC: Research, Promotion & Activities",
-        "OFFICE": 55020,
-    },
-    {
-        "NAME": "NIKBAKHT SILAB, RASOUL",
-        "GROUP ": "WN: Wireless Networking Group",
-        "OFFICE": 55210,
-    },
-    {
-        "NAME": "JORDA PUIG, SERGI",
-        "GROUP ": "MTG: Music Technology Group",
-        "OFFICE": 55326,
-    },
-    {
-        "NAME": "RUZZENE , GIULIA",
-        "GROUP ": "NTSA: Nonlinear Time Series Analysis Group",
-        "OFFICE": 55117,
-    },
-    {
-        "NAME": "RAFOLS SALVADOR, CARLA",
-        "GROUP ": "WN: Wireless Networking Group",
-        "OFFICE": 55216,
-    },
-    {
-        "NAME": "MALVESTIO , IRENE",
-        "GROUP ": "NTSA: Nonlinear Time Series Analysis Group",
-        "OFFICE": 55117,
-    },
-    {
-        "NAME": "PEIG OLIVE, ENRIC",
-        "GROUP ": "UBICALAB: Ubiquitous Computing Applications Lab",
-        "OFFICE": 55008,
-    }
-]
-
 
 class ActionTellTime(Action):
     #1. Define the name of the action. This will be used in the stories , domain and in the endpoint.yml
@@ -234,6 +136,22 @@ class retreiveFacultyDetails(Action):
         except Exception as e:
             print('error while reading excel',e)
             dispatcher.utter_message("I'm sorry, I am facing trouble fetching information right now. Please try after sometime!")
-            return []
+            return ['']
 
 
+        def validate_circuit(
+                self,
+                slot_value: Any,
+                dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: DomainDict,
+            ) -> Dict[Text, Any]:
+                """Validate circuit value."""
+                # if the name is super short, it might be wrong
+                print(f"Circuit name given = {slot_value} length = {len(slot_value)}")
+                if len(slot_value) <= 3:
+                    dispatcher.utter_message(text=f"That's a very short circuit name. I'm assuming you mis-spelled.")
+                    return {"circuit": None}
+                else:
+                    print('Circuit: ' + slot_value)
+                    return {"circuit": slot_value}

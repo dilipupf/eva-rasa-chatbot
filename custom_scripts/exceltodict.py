@@ -38,26 +38,26 @@ def return_matching_names(personName, names):
     filtered_names = names[indexes]
     return [indexes, filtered_names]
 
-if __name__ == '__main__':  
-    try:
-        df = excel_to_dict.read_excel('../data/listado.xlsx')
-        # print(df.head())
-        personName = 'JORGE LOBO'
-        names = df[df.columns[0]].values.astype(str)
-        return_matched_names = return_matching_names(personName, names)
-        print(return_matched_names)
+# if __name__ == '__main__':  
+#     try:
+#         df = excel_to_dict.read_excel('../data/listado.xlsx')
+#         # print(df.head())
+#         personName = 'JORGE LOBO'
+#         names = df[df.columns[0]].values.astype(str)
+#         return_matched_names = return_matching_names(personName, names)
+#         print(return_matched_names)
 
-        if bool(len(return_matched_names) > 0): #check if the person name is present in the excel sheet on first column
-            print('Person Name is present in the excel sheet')
-            # row = df.loc[df[df.columns[0]] == personName]
-            # department = row.iloc[0,1]
-            # office_num = row.iloc[0,2]
-            #print('Department: ', department)
-        else:
-            print('Person Name is not present in the excel sheet')
+#         if bool(len(return_matched_names) > 0): #check if the person name is present in the excel sheet on first column
+#             print('Person Name is present in the excel sheet')
+#             # row = df.loc[df[df.columns[0]] == personName]
+#             # department = row.iloc[0,1]
+#             # office_num = row.iloc[0,2]
+#             #print('Department: ', department)
+#         else:
+#             print('Person Name is not present in the excel sheet')
             
-    except Exception as e:
-        print(e)
+#     except Exception as e:
+#         print(e)
 
 
 

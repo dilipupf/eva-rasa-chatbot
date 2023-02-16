@@ -1,235 +1,900 @@
-
 version: "2.0"
 nlu:
   - lookup: person_names
     examples: |
       - JORGE LOBO
+      - JORGE
+      - LOBO
       - MARCO JEROME GASPARRINI
+      - MARCO
+      - JEROME
+      - GASPARRINI
       - VICENTE GOMEZ CERDA
+      - VICENTE
+      - GOMEZ
+      - CERDA
       - ANDERS JONSSON
+      - ANDERS
+      - JONSSON
       - GERGELY NEU
+      - GERGELY
+      - NEU
       - MARTI SANCHEZ FIBLA
+      - MARTI
+      - SANCHEZ
+      - FIBLA
       - VICTOR DALMAU LLORET
+      - VICTOR
+      - DALMAU
+      - LLORET
       - VLADIMIR ESTIVILL CASTRO
+      - VLADIMIR
+      - ESTIVILL
+      - CASTRO
       - PABLO ARAGON ASENJO
+      - PABLO
+      - ARAGON
+      - ASENJO
       - JOAN BAS SERRANO
+      - JOAN
+      - BAS
+      - SERRANO
       - SILVIA BUTTI
+      - SILVIA
+      - BUTTI
       - IULIIA OLKHOVSKAIA
+      - IULIIA
+      - OLKHOVSKAIA
       - NICOLAS GASTON ROZADO
+      - NICOLAS
+      - GASTON
+      - ROZADO
       - LORENZO STECCANELLA
+      - LORENZO
+      - STECCANELLA
       - DAMIEN ALLONSIUS
+      - DAMIEN
+      - ALLONSIUS
       - BERKAY DEMIREL
+      - BERKAY
+      - DEMIREL
       - ANA GONZALEZ SUAREZ
+      - ANA
+      - GONZALEZ
+      - SUAREZ
       - JAVIER AGUIRRE OLCOZ
+      - JAVIER
+      - AGUIRRE
+      - OLCOZ
       - QUIM CASTELLVI
+      - QUIM
+      - CASTELLVI
       - ALBERT COMERMA MONTELLS
+      - ALBERT
+      - COMERMA
+      - MONTELLS
       - TOMÁS GARCIA SANCHEZ
+      - TOMÁS
+      - GARCIA
+      - SANCHEZ
       - ARACELYS GARCIA MORENO
+      - ARACELYS
+      - GARCIA
+      - MORENO
       - LAURA BECERRA FAJARDO
+      - LAURA
+      - BECERRA
+      - FAJARDO
       - AHMED FAYEZ SAAD MOHAMED ELADLY ELADLY
+      - AHMED
+      - FAYEZ
+      - SAAD
+      - MOHAMED
+      - ELADLY
+      - ELADLY
       - BORJA MERCADAL CAVALLER
+      - BORJA
+      - MERCADAL
+      - CAVALLER
       - JESUS MINGUILLON CAMPOS
+      - JESUS
+      - MINGUILLON
+      - CAMPOS
       - MARC TUDELA PI
+      - MARC
+      - TUDELA
+      - PI
       - GUILLERMO JIMENEZ PEREZ
+      - GUILLERMO
+      - JIMENEZ
+      - PEREZ
       - ROCIO LOPEZ VELAZCO
+      - ROCIO
+      - LOPEZ
+      - VELAZCO
       - ENRIC PERERA I BEL
+      - ENRIC
+      - PERERA
+      - I
+      - BEL
       - ANTONIO IVORRA CANO
+      - ANTONIO
+      - IVORRA
+      - CANO
       - XERXES DINYAR ARSIWALLA
+      - XERXES
+      - DINYAR
+      - ARSIWALLA
       - RICCARDO ZUCCA
+      - RICCARDO
+      - ZUCCA
       - CIERA CROWELL
+      - CIERA
+      - CROWELL
       - LAURA MALINVERNI
+      - LAURA
+      - MALINVERNI
       - JOAN MORA GUIARD
+      - JOAN
+      - MORA
+      - GUIARD
       - MARIE-MONIQUE SCHAPER
+      - MARIE-MONIQUE
+      - SCHAPER
       - DECKY LATIF
+      - DECKY
+      - LATIF
       - ORIOL MARTINEZ PUJOL
+      - ORIOL
+      - MARTINEZ
+      - PUJOL
       - XAVIER BINEFA VALLS
+      - XAVIER
+      - BINEFA
+      - VALLS
       - ADRIANA FERNANDEZ LOPEZ
+      - ADRIANA
+      - FERNANDEZ
+      - LOPEZ
       - GERALD HAHN
+      - GERALD
+      - HAHN
       - MARIA DE ARACELI MORALES MUÑOZ
+      - MARIA
+      - DE
+      - ARACELI
+      - MORALES
+      - MUÑOZ
       - FEDERICO MATEO SUKNO
+      - FEDERICO
+      - MATEO
+      - SUKNO
       - NARCIS PARES BURGUES
+      - NARCIS
+      - PARES
+      - BURGUES
       - BATUHAN SAYIS
+      - BATUHAN
+      - SAYIS
       - ERNEST MONTBRIÓ FAIREN
+      - ERNEST
+      - MONTBRIÓ
+      - FAIREN
       - MARCELO JOSÉ BERTALMIO BARATE
+      - MARCELO
+      - JOSÉ
+      - BERTALMIO
+      - BARATE
       - TREVOR DALTON CANHAM
+      - TREVOR
+      - DALTON
+      - CANHAM
       - PRAVEEN CYRIAC
+      - PRAVEEN
+      - CYRIAC
       - RAQUEL GIL RODRIGUEZ
+      - RAQUEL
+      - GIL
+      - RODRIGUEZ
       - ALEXANDER GOMEZ VILLA
+      - ALEXANDER
+      - GOMEZ
+      - VILLA
       - ITZIAR ZABALETA RAZQUIN
+      - ITZIAR
+      - ZABALETA
+      - RAZQUIN
       - ADRIAN MARTIN FERNANDEZ
+      - ADRIAN
+      - MARTIN
+      - FERNANDEZ
       - ADRIÀ ARBUES SANGÜESA
+      - ADRIÀ
+      - ARBUES
+      - SANGÜESA
       - ADRIAN FERNANDO PONCE ALVAREZ
+      - ADRIAN
+      - FERNANDO
+      - PONCE
+      - ALVAREZ
       - PATRICIA VITORIA CARRERA
+      - PATRICIA
+      - VITORIA
+      - CARRERA
       - COLOMA MARIA BALLESTER NICOLAU
+      - COLOMA
+      - MARIA
+      - BALLESTER
+      - NICOLAU
       - GLORIA HARO ORTEGA
+      - GLORIA
+      - HARO
+      - ORTEGA
       - LARA RAAD CISA
+      - LARA
+      - RAAD
+      - CISA
       - JUAN FRANCISCO GARAMENDI BRAGADO
+      - JUAN
+      - FRANCISCO
+      - GARAMENDI
+      - BRAGADO
       - JUAN FELIPE MONTESINOS GARCIA
+      - JUAN
+      - FELIPE
+      - MONTESINOS
+      - GARCIA
       - VENKATESH SHENOY KADANDALE
+      - VENKATESH
+      - SHENOY
+      - KADANDALE
       - OLGA SLIZOVSKAIA
+      - OLGA
+      - SLIZOVSKAIA
       - JOSEP FONT SEGURA
+      - JOSEP
+      - FONT
+      - SEGURA
       - ALFONSO MARTINEZ VICENTE
+      - ALFONSO
+      - MARTINEZ
+      - VICENTE
       - IVANO COLOMBARO
+      - IVANO
+      - COLOMBARO
       - AREZOU REZAZADEH
+      - AREZOU
+      - REZAZADEH
       - SERGIO BARRACHINA MUÑOZ
+      - SERGIO
+      - BARRACHINA
+      - MUÑOZ
       - ALBERT GUILLEN FABREGAS
+      - ALBERT
+      - GUILLEN
+      - FABREGAS
       - SEBASTIÁN ROBERTO MARICHAL BARAIBAR
+      - SEBASTIÁN
+      - ROBERTO
+      - MARICHAL
+      - BARAIBAR
       - JAVIER AGENJO ASENSIO
+      - JAVIER
+      - AGENJO
+      - ASENSIO
       - IRUM BASEER
+      - IRUM
+      - BASEER
       - MARIA BOSSER CARENYS
+      - MARIA
+      - BOSSER
+      - CARENYS
       - BEATRIZ CABRERO DANIEL
+      - BEATRIZ
+      - CABRERO
+      - DANIEL
       - JOAQUIM COLAS ALVAREZ
+      - JOAQUIM
+      - COLAS
+      - ALVAREZ
       - RICARDO JORGE MARQUES
+      - RICARDO
+      - JORGE
+      - MARQUES
       - JUDIT MARTÍNEZ MORENO
+      - JUDIT
+      - MARTÍNEZ
+      - MORENO
       - HERMANN PLASS PORTULAS
+      - HERMANN
+      - PLASS
+      - PORTULAS
       - JOSE ANGEL BLAT GIMENO
+      - JOSE
+      - ANGEL
+      - BLAT
+      - GIMENO
       - PHILIP TOVSTOGAN
+      - PHILIP
+      - TOVSTOGAN
       - MEHMET FURKAN YESILER
+      - MEHMET
+      - FURKAN
+      - YESILER
       - RAFAEL CARO REPETTO
+      - RAFAEL
+      - CARO
+      - REPETTO
       - VSEVOLOD EREMENKO
+      - VSEVOLOD
+      - EREMENKO
       - NINAD PURANIK
+      - NINAD
+      - PURANIK
       - ANTÓNIO FILIPE SANTANA RAMIRES
+      - ANTÓNIO
+      - FILIPE
+      - SANTANA
+      - RAMIRES
       - TIANGE ZHU
+      - TIANGE
+      - ZHU
       - DAVID CABRERA
+      - DAVID
+      - CABRERA
       - ALBIN ANDREW CORREYA
+      - ALBIN
+      - ANDREW
+      - CORREYA
       - XAVIER FAVORY
+      - XAVIER
+      - FAVORY
       - ANDRES FERRARO
+      - ANDRES
+      - FERRARO
       - EDUARDO DAVID FONSECA MONTERO
+      - EDUARDO
+      - DAVID
+      - FONSECA
+      - MONTERO
       - FREDERIC FONT CORBERA
+      - FREDERIC
+      - FONT
+      - CORBERA
       - SERGIO ORAMAS MARTIN
+      - SERGIO
+      - ORAMAS
+      - MARTIN
       - ALASTAIR STEWART PORTER
+      - ALASTAIR
+      - STEWART
+      - PORTER
       - PABLO ALONSO JIMENEZ
+      - PABLO
+      - ALONSO
+      - JIMENEZ
       - DMITRY BOGDANOV
+      - DMITRY
+      - BOGDANOV
       - JORDI PONS PUIG
+      - JORDI
+      - PONS
+      - PUIG
       - MINZ WON
+      - MINZ
+      - WON
       - MERLIJN BLAAUW
+      - MERLIJN
+      - BLAAUW
       - JORDI BONADA SANJAUME
+      - JORDI
+      - BONADA
+      - SANJAUME
       - MARTI UMBERT MORIST
+      - MARTI
+      - UMBERT
+      - MORIST
       - AGGELOS GKIOKAS
+      - AGGELOS
+      - GKIOKAS
       - MARIUS MIRON
+      - MARIUS
+      - MIRON
       - ALFONSO ANTONIO PEREZ CARRILLO
+      - ALFONSO
+      - ANTONIO
+      - PEREZ
+      - CARRILLO
       - EMILIA GOMEZ GUTIERREZ
+      - EMILIA
+      - GOMEZ
+      - GUTIERREZ
       - ENRIQUE GUAUS TERMENS
+      - ENRIQUE
+      - GUAUS
+      - TERMENS
       - AGUSTIN MARTORELL DOMINGUEZ
+      - AGUSTIN
+      - MARTORELL
+      - DOMINGUEZ
       - SERGIO IVÁN GIRALDO MENDEZ
+      - SERGIO
+      - IVÁN
+      - GIRALDO
+      - MENDEZ
       - RAFAEL RAMIREZ MELENDEZ
+      - RAFAEL
+      - RAMIREZ
+      - MELENDEZ
       - ZACHARIAS VAMVAKOUSIS
+      - ZACHARIAS
+      - VAMVAKOUSIS
       - HELENA CUESTA MUSSARRA
+      - HELENA
+      - CUESTA
+      - MUSSARRA
       - JUAN SEBASTIÁN GOMEZ CAÑON
+      - JUAN
+      - SEBASTIÁN
+      - GOMEZ
+      - CAÑON
       - PERFECTO JOSE HERRERA BOYER
+      - PERFECTO
+      - JOSE
+      - HERRERA
+      - BOYER
       - LORENZO PORCARO
+      - LORENZO
+      - PORCARO
       - JOAN SERRA JULIA
+      - JOAN
+      - SERRA
+      - JULIA
       - ANGEL-DAVID BLANCO CASARES
+      - ANGEL-DAVID
+      - BLANCO
+      - CASARES
       - AZADEH FARIDI ERMAGAN
+      - AZADEH
+      - FARIDI
+      - ERMAGAN
       - SONIA ESPI FERNANDEZ
+      - SONIA
+      - ESPI
+      - FERNANDEZ
       - CRISTINA GARRIDO FRANQUET
+      - CRISTINA
+      - GARRIDO
+      - FRANQUET
       - FRANCESC XAVIER SERRA CASALS
+      - FRANCESC
+      - XAVIER
+      - SERRA
+      - CASALS
       - SERGI JORDA PUIG
+      - SERGI
+      - JORDA
+      - PUIG
       - ANDRES LEWIN RICHTER OSIANDER
+      - ANDRES
+      - LEWIN
+      - RICHTER
+      - OSIANDER
       - ANGEL FARALDO PEREZ
+      - ANGEL
+      - FARALDO
+      - PEREZ
       - LEO WANNER
+      - LEO
+      - WANNER
       - HORACIO SAGGION
+      - HORACIO
+      - SAGGION
       - MIQUEL OLIVER RIERA
+      - MIQUEL
+      - OLIVER
+      - RIERA
       - RALPH GREGOR ANDRZEJAK
+      - RALPH
+      - GREGOR
+      - ANDRZEJAK
       - FEDERICO DEVALLE
+      - FEDERICO
+      - DEVALLE
       - CRISTINA GONZALEZ MARTINEZ
+      - CRISTINA
+      - GONZALEZ
+      - MARTINEZ
       - IRENE MALVESTIO
+      - IRENE
+      - MALVESTIO
       - ANGELA OGBUGWA OCHUGBOJU
+      - ANGELA
+      - OGBUGWA
+      - OCHUGBOJU
       - GIULIA RUZZENE
+      - GIULIA
+      - RUZZENE
       - JUDIT CHAMORRO SERVENT
+      - JUDIT
+      - CHAMORRO
+      - SERVENT
       - MARTA GUARDIOLA GARCIA
+      - MARTA
+      - GUARDIOLA
+      - GARCIA
       - CARLOS YAGÜE MENDEZ
+      - CARLOS
+      - YAGÜE
+      - MENDEZ
       - RUBEN DOSTE BELTRAN
+      - RUBEN
+      - DOSTE
+      - BELTRAN
       - GERARD MARTI JUAN
+      - GERARD
+      - MARTI
+      - JUAN
       - MARIANA NOGUEIRA
+      - MARIANA
+      - NOGUEIRA
       - CECILIA MARIA COSTA BENTO SOUSA NUNES
+      - CECILIA
+      - MARIA
+      - COSTA
+      - BENTO
+      - SOUSA
+      - NUNES
       - MORTEZA RASOULIGANDOMANI
+      - MORTEZA
+      - RASOULIGANDOMANI
       - OSCAR CAMARA REY
+      - OSCAR
+      - CAMARA
+      - REY
       - BART H BIJNENS
+      - BART
+      - H
+      - BIJNENS
       - PALOMA BENAVENT CLIMENT
+      - PALOMA
+      - BENAVENT
+      - CLIMENT
       - BELEN PASCUAL MOLINA
+      - BELEN
+      - PASCUAL
+      - MOLINA
       - MANUEL RONDA CARRASCO
+      - MANUEL
+      - RONDA
+      - CARRASCO
       - MIGUEL ANGEL GONZALEZ BALLESTER
+      - MIGUEL
+      - ANGEL
+      - GONZALEZ
+      - BALLESTER
       - MARIO CERESA
+      - MARIO
+      - CERESA
       - NEREA MANGADO LOPEZ
+      - NEREA
+      - MANGADO
+      - LOPEZ
       - KATHARINA HEIL
+      - KATHARINA
+      - HEIL
       - KARIM LEKADIR
+      - KARIM
+      - LEKADIR
       - JEROME BERNARD NOAILLY
+      - JEROME
+      - BERNARD
+      - NOAILLY
       - ANDY LUIS OLIVARES MIYARES
+      - ANDY
+      - LUIS
+      - OLIVARES
+      - MIYARES
       - CARLOS EDUARDO RUIZ WILLS
+      - CARLOS
+      - EDUARDO
+      - RUIZ
+      - WILLS
       - SIMONE TASSANI
+      - SIMONE
+      - TASSANI
       - SERGIO SANCHEZ MARTINEZ
+      - SERGIO
+      - SANCHEZ
+      - MARTINEZ
       - JORDINA TORRENTS BARRENA
+      - JORDINA
+      - TORRENTS
+      - BARRENA
       - LAURA BAUMGARTNER
+      - LAURA
+      - BAUMGARTNER
       - VÍCTOR MANUEL CAMPELLO ROMAN
+      - VÍCTOR
+      - MANUEL
+      - CAMPELLO
+      - ROMAN
       - IREM CETIN
+      - IREM
+      - CETIN
       - AMELIA JIMENEZ SANCHEZ
+      - AMELIA
+      - JIMENEZ
+      - SANCHEZ
       - ERIC LLUCH ALVAREZ
+      - ERIC
+      - LLUCH
+      - ALVAREZ
       - PABLO-MIKI MARTÍ CASTELLOTE
+      - PABLO-MIKI
+      - MARTÍ
+      - CASTELLOTE
       - GEMA PIELLA FENOY
+      - GEMA
+      - PIELLA
+      - FENOY
       - JOAN CODINA FILBA
+      - JOAN
+      - CODINA
+      - FILBA
       - HAMDI ALP ÖKTEM
+      - HAMDI
+      - ALP
+      - ÖKTEM
       - MIREIA FARRUS CABECERAN
+      - MIREIA
+      - FARRUS
+      - CABECERAN
       - AHMED GHASSAN TAWFIQ ABURA'ED
+      - AHMED
+      - GHASSAN
+      - TAWFIQ
+      - ABURA'ED
       - FRANCESCO BARBIERI
+      - FRANCESCO
+      - BARBIERI
       - GIORGIA CISTOLA
+      - GIORGIA
+      - CISTOLA
       - ALEX PEIRO LILJA
+      - ALEX
+      - PEIRO
+      - LILJA
       - ROBERTO JUAN CARLINI SALGUERO
+      - ROBERTO
+      - JUAN
+      - CARLINI
+      - SALGUERO
       - CARLA TEN VENTURA
+      - CARLA
+      - TEN
+      - VENTURA
       - JENS GRIVOLLA
+      - JENS
+      - GRIVOLLA
       - GERARD CASAMAYOR DEL BOSQUE
+      - GERARD
+      - CASAMAYOR
+      - DEL
+      - BOSQUE
       - ALEXANDRA-CATALINA MATREATA
+      - ALEXANDRA-CATALINA
+      - MATREATA
       - MARIELLA DIMICCOLI
+      - MARIELLA
+      - DIMICCOLI
       - BEATRIZ FISAS ELIZALDE
+      - BEATRIZ
+      - FISAS
+      - ELIZALDE
       - ALEXANDER SHVETS
+      - ALEXANDER
+      - SHVETS
       - PABLO ACCUOSTO
+      - PABLO
+      - ACCUOSTO
       - ALEX BRAVO SERRANO
+      - ALEX
+      - BRAVO
+      - SERRANO
       - KIM CHENG SHEANG
+      - KIM
+      - CHENG
+      - SHEANG
       - LAIA ALBO
+      - LAIA
+      - ALBO
       - ISHARI AMARASINGHE
+      - ISHARI
+      - AMARASINGHE
       - MARC YOSHIMI BEARDSLEY
+      - MARC
+      - YOSHIMI
+      - BEARDSLEY
       - MILICA VUJOVIC
+      - MILICA
+      - VUJOVIC
       - PASCUAL PABLO ABENIA POLO
+      - PASCUAL
+      - PABLO
+      - ABENIA
+      - POLO
       - DAVINIA HERNANDEZ LEO
+      - DAVINIA
+      - HERNANDEZ
+      - LEO
       - PATRICIA SANTOS RODRIGUEZ
+      - PATRICIA
+      - SANTOS
+      - RODRIGUEZ
       - ENRIC PEIG OLIVE
+      - ENRIC
+      - PEIG
+      - OLIVE
       - JOAN ANTONI MELIA SEGUI
+      - JOAN
+      - ANTONI
+      - MELIA
+      - SEGUI
       - RAFAEL POUS ANDRES
+      - RAFAEL
+      - POUS
+      - ANDRES
       - VICTOR CASAMAYOR PUJOL
+      - VICTOR
+      - CASAMAYOR
+      - PUJOL
       - VERONICA MORENO OLIVER
+      - VERONICA
+      - MORENO
+      - OLIVER
       - JUDITH CHAMPION COLELL
+      - JUDITH
+      - CHAMPION
+      - COLELL
       - NURIA FIGULS FERNANDEZ
+      - NURIA
+      - FIGULS
+      - FERNANDEZ
       - MONTSERRAT JAUREGUIZAR SALAS
+      - MONTSERRAT
+      - JAUREGUIZAR
+      - SALAS
       - MARIA LOURDES VENTAYOL BORRAS
+      - MARIA
+      - LOURDES
+      - VENTAYOL
+      - BORRAS
       - MARTA MONTIEL
+      - MARTA
+      - MONTIEL
       - LYDIA GARCIA ESCOBOSA
+      - LYDIA
+      - GARCIA
+      - ESCOBOSA
       - JANA SAFRANKOVA
+      - JANA
+      - SAFRANKOVA
       - MARIA MONTSERRAT BRILLAS ROSELL
+      - MARIA
+      - MONTSERRAT
+      - BRILLAS
+      - ROSELL
       - NURIA BARRIO
+      - NURIA
+      - BARRIO
       - MONTSERRAT SERRANO RAGUAN
+      - MONTSERRAT
+      - SERRANO
+      - RAGUAN
       - PATRICIA PINO
+      - PATRICIA
+      - PINO
       - JOANA CLOTET SULE
+      - JOANA
+      - CLOTET
+      - SULE
       - XAVIER MONTE LLOPIS
+      - XAVIER
+      - MONTE
+      - LLOPIS
       - VANESSA JIMENEZ GARCIA
+      - VANESSA
+      - JIMENEZ
+      - GARCIA
       - MOHIT HEMCHANDRA ADHIKARI
+      - MOHIT
+      - HEMCHANDRA
+      - ADHIKARI
       - BORIS BELLALTA JIMENEZ
+      - BORIS
+      - BELLALTA
+      - JIMENEZ
       - FRANCISCO JOSE WILHELMI ROCA
+      - FRANCISCO
+      - JOSE
+      - WILHELMI
+      - ROCA
       - FEDERICO FRANZONI
+      - FEDERICO
+      - FRANZONI
       - RASOUL NIKBAKHT SILAB
+      - RASOUL
+      - NIKBAKHT
+      - SILAB
       - ZAIRA PINDADO TOST
+      - ZAIRA
+      - PINDADO
+      - TOST
       - XAVIER SALLERAS SOLER
+      - XAVIER
+      - SALLERAS
+      - SOLER
       - JAVIER SILVA VELON
+      - JAVIER
+      - SILVA
+      - VELON
       - VANESA DAZA FERNANDEZ
+      - VANESA
+      - DAZA
+      - FERNANDEZ
       - CARLA RAFOLS SALVADOR
+      - CARLA
+      - RAFOLS
+      - SALVADOR
       - ANGEL LOZANO SOLSONA
+      - ANGEL
+      - LOZANO
+      - SOLSONA
       - ANTONIO ADAME VAZQUEZ
+      - ANTONIO
+      - ADAME
+      - VAZQUEZ
       - ALBERT BEL PEREIRA
+      - ALBERT
+      - BEL
+      - PEREIRA
       - MARC CARRASCOSA ZAMACOIS
+      - MARC
+      - CARRASCOSA
+      - ZAMACOIS
       - ALEJANDRO ALCAINE OTIN
+      - ALEJANDRO
+      - ALCAINE
+      - OTIN
       - CARLOS ALBERTO ALEJANDRO CASTILLO OCARANZA
+      - CARLOS
+      - ALBERTO
+      - ALEJANDRO
+      - CASTILLO
+      - OCARANZA
       - ANA MARIA FREIRE VEIGA
+      - ANA
+      - MARIA
+      - FREIRE
+      - VEIGA
       - SANTIAGO GALELLA TOLEDO
+      - SANTIAGO
+      - GALELLA
+      - TOLEDO
       - MARZIEH KARIMIHAGHIGHI
+      - MARZIEH
+      - KARIMIHAGHIGHI
       - DIANA MICHELLE RAMIREZ CIFUENTES
+      - DIANA
+      - MICHELLE
+      - RAMIREZ
+      - CIFUENTES
       - MARIA RAUSCHENBERGER
+      - MARIA
+      - RAUSCHENBERGER
       - RICARDO ALBERTO BAEZA YATES
+      - RICARDO
+      - ALBERTO
+      - BAEZA
+      - YATES

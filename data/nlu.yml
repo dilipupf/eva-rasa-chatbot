@@ -87,9 +87,9 @@ nlu:
     examples: |
       - Can you give me all the details about [Jorge Lobo] (person_names) facutly
       - Can you give me all the details about [ANDERS JONSSON](person_names)
-      - I need information about [MARCO JEROME GASPARRINI] (person_names)
-      - I require some general information about [Jorge LOBO](person_names)
-      - I need information regarding [GERGELY NEU](person_names)
+      - I'd need information about [MARCO JEROME GASPARRINI] (person_names)
+      - I'd require some general information about [Jorge LOBO](person_names)
+      - I'd need information regarding [GERGELY NEU](person_names)
   - intent: ask_office_details
     examples: |
       - I would like to know to where the dtic faculty rooms are

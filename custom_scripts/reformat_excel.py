@@ -42,6 +42,7 @@ def get_dataframe_with_reformatted_names(file_path, no_of_cols):
     # print first 5 rows of the list
     #print('reformatted dataframe', df[:5])
 
+
     return df
 
 # if __name__ == '__main__':
