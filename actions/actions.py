@@ -12,6 +12,9 @@ import arrow
 import re
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.forms import FormValidationAction
+from rasa_sdk.types import DomainDict
+from rasa_sdk.events import AllSlotsReset, Form, SlotSet, FollowupAction
 import os
 import pandas as pd
 import sys
@@ -88,7 +91,7 @@ class retreiveFacultyDetails(Action):
     #1. Define the name of the action. This will be used in the stories , domain and in the endpoint.yml
     def name(self) -> Text:
         return "action_return_general_info_person"
-        # Can you give me all the details about Jorge Lobo
+        # Can you give me all the details about JORGE
     
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
@@ -124,7 +127,7 @@ class retreiveFacultyDetails(Action):
 
                 elif bool(len(indexes) > 1):
                     dispatcher.utter_message('I have found more than one person with the name ' + personName + '. Please be more specific.')
-                    return []
+                    return [SlotSet("slot_person_names", return_matched_names), FollowupAction('action_choose_person_name')]
                 else:
                     raise Exception('Person not found in database')
     
@@ -138,20 +141,78 @@ class retreiveFacultyDetails(Action):
             dispatcher.utter_message("I'm sorry, I am facing trouble fetching information right now. Please try after sometime!")
             return ['']
 
+class retreiveOfficeDetails(Action):
+    #1. Define the name of the action. This will be used in the stories , domain and in the endpoint.yml
+    def name(self) -> Text:
+        return "action_return_office_info_person"
+        # Can you give me all the details about JORGE
+    
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        try:
+           
+            print("Inside retreiveOfficeDetails")
+            personName = next(tracker.get_latest_entity_values("person_names"), None)
+            print(f'person_names entity value: {personName}')
 
-        def validate_circuit(
-                self,
-                slot_value: Any,
-                dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: DomainDict,
-            ) -> Dict[Text, Any]:
-                """Validate circuit value."""
-                # if the name is super short, it might be wrong
-                print(f"Circuit name given = {slot_value} length = {len(slot_value)}")
-                if len(slot_value) <= 3:
-                    dispatcher.utter_message(text=f"That's a very short circuit name. I'm assuming you mis-spelled.")
-                    return {"circuit": None}
+            if(personName is None):
+                dispatcher.utter_message("I couldn't recognize who you are looking for. Can you please try with their full name?")
+                return []
+
+            try:
+                df = read_excel(file_path = file_path)
+                names = df[df.columns[0]].values.astype(str)
+                indexes, return_matched_names = return_matching_names(personName, names)
+                print(indexes)
+                print(return_matched_names)
+
+                # print(personName in df[df.columns[0]].values  == True)
+
+                if bool(len(indexes) == 1): #check if the person name is present in the excel sheet on first column
+                    # return index where personName is present in return_matched_names numpy array
+                       
+                        department= df[df.columns[1]].values[indexes][0]
+                        office_num = df[df.columns[2]].values[indexes][0]
+                        print(department)
+                        print(office_num)
+                  
+                        dispatcher.utter_message(personName +' sits in the office number: ' + str(office_num))
+                        return []
+
+                elif bool(len(indexes) > 1):
+                    dispatcher.utter_message('I have found more than one person with the name ' + personName)
+                    return [SlotSet("slot_person_names", return_matched_names), FollowupAction('action_choose_person_name')]
                 else:
-                    print('Circuit: ' + slot_value)
-                    return {"circuit": slot_value}
+                    raise Exception('Person not found in database')
+    
+            except Exception as e:
+                print('error while reading excel: ',e)
+                dispatcher.utter_message("I'm sorry, there was an error while fetching from my records!")
+                return []
+       
+        except Exception as e:
+            print('error while reading excel',e)
+            dispatcher.utter_message("I'm sorry, I am facing trouble fetching information right now. Please try after sometime!")
+            return ['']
+
+class choosePersonNameFromMultipleOptions(Action):
+    def name(self) -> Text:
+        return "action_choose_person_name"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # get the names list set by action one
+        names = tracker.get_slot("slot_person_names")
+        print('names', names)
+
+        # create a list of buttons with the names as options
+        buttons = []
+        for name in names:
+            buttons.append({"title": name, "payload": '/person_names'})
+    
+        # display the buttons to the user
+        message = "Please choose the name of the person you want to get information of:"
+        dispatcher.utter_message(text=message, buttons=buttons)
+
+        return []
+

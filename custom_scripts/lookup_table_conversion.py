@@ -25,7 +25,7 @@ def lookup_table_conversion():
         #include the first column from the excel file
         df = df[df.columns[0]]
 
-        # conver the names column from last name, first name to first name last name format using the regular expression
+        # convert the names column from last name, first name to first name last name format using the regular expression
         # if isinstance(x, str) is a check to make sure that the value is a string
         df = df.apply(lambda x: re.sub(r'([^,]+),\s*(.+)', r'\2 \1', x) if isinstance(x, str) else x)
 

@@ -28,10 +28,26 @@ stories:
       - intent: deny
       - action: utter_goodbye
 
-  - story: ask_personal_info
+  - story: story_ask_personal_info
     steps:
       - intent: ask_general_info_person
       - action: action_return_general_info_person
       - slot_was_set:
-          - person_name: [{ "name": "Xavier Pinto" }]
-      - action: action_choose_person_name
+          - slot_person_names:
+              [{ "name": "Xavier Pinto" }, { "name": "Jorge Lobo" }]
+
+  - story: story_ask_office_details
+    steps:
+      - intent: ask_office_details_person
+      - action: action_return_office_info_person
+      - slot_was_set:
+          - slot_person_names:
+              [{ "name": "Xavier Pinto" }, { "name": "Jorge Lobo" }]
+
+  - story: story_ask_department_details
+    steps:
+      - intent: ask_department_details_person
+      - action: action_return_department_info_person
+      - slot_was_set:
+          - slot_person_names:
+              [{ "name": "Xavier Pinto" }, { "name": "Jorge Lobo" }]

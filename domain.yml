@@ -10,9 +10,18 @@ intents:
   - bot_challenge
   - inquire_time
   - ask_general_info_person
+  - ask_department_details_person
+  - ask_office_details_person
+
 entites:
   - person_names
-  - place
+slots:
+  slot_person_names:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: person_names
 responses:
   utter_greet:
     - text: "Hey! How are you?"
@@ -39,4 +48,7 @@ session_config:
 
 actions:
   - action_return_general_info_person
+  - action_return_office_info_person
+  - action_return_department_info_person
+  - action_choose_person_name
   - action_tell_time

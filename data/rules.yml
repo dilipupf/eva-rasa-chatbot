@@ -11,11 +11,6 @@ rules:
       - intent: bot_challenge
       - action: utter_iamabot
 
-  - rule: Find a person
-    steps:
-      - intent: ask_general_info_person
-      - action: action_return_general_info_person
-
   - rule: Tell the time
     steps:
       - intent: inquire_time

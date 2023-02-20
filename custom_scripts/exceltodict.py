@@ -34,8 +34,9 @@ def return_matching_names(personName, names):
             else:
                 indexes.append(pos)
             start = index + 1
-
-    filtered_names = names[indexes]
+    # filtered neams from the list of indexes and convert to list from numpy array so that it can be passed
+    # to serialize in slotset function later.
+    filtered_names = names[indexes].tolist()
     return [indexes, filtered_names]
 
 # if __name__ == '__main__':  
