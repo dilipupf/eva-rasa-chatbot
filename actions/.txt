@@ -1,0 +1,19 @@
+{
+  "user_id": 17240,
+  "user_name": "Winterbay",
+  "timestamp": 1640995200,
+  "track_metadata": {
+    "artist_name": "Tiken Jah Fakoly",
+    "release_name": "Coup De Gueule",
+    "additional_info": {
+      "artist_msid": "f03fa31b-a428-47e2-8dcb-bceec9ca1221",
+      "release_msid": "238bd863-a293-4718-a66b-093ea54bf8f3",
+      "listening_from": "lastfm",
+      "recording_msid": "f216e2fb-784d-470a-81b2-6e27cd532204",
+      "lastfm_artist_mbid": "edef3cfa-4e5e-4d64-8bd8-20f9dc1d8cad",
+      "lastfm_release_mbid": "9dc7fe6a-3fa4-4461-8975-ecb7218b39a3"
+    },
+    "track_name": "Alou Maye"
+  },
+  "recording_msid": "f216e2fb-784d-470a-81b2-6e27cd532204"
+}

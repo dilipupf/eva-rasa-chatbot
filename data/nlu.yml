@@ -105,8 +105,3 @@ nlu:
     examples: |
       - I would like to know to where the dtic faculty rooms are
       - Where can i find the office of a dtic faculty
-  - intent: inquire_time
-    examples: |
-      - what time is it?
-      - what time is it in [Amsterdam](place)?
-      - what time is it in [seattle] (place)?
