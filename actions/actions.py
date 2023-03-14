@@ -97,6 +97,9 @@ class retreiveDeptDetails(Action):
             print("Inside retreiveDeptDetails")
             personName = next(tracker.get_latest_entity_values("person_names"), None)
             print(f'person_names entity value: {personName}')
+            # get the names name from the slot
+            slot_name = tracker.get_slot('slot_person_names')
+            print(f'slot_name entity value: {slot_name}')
 
             if(personName is None):
                 dispatcher.utter_message("I couldn't recognize who you are looking for. Can you please try with their full name?")
@@ -217,21 +220,71 @@ class choosePersonNameFromMultipleOptions(Action):
             #buttons.append({"title": name, "payload": '/action_return_department_info_person{"person_names": "'+name+'"}'})
             
             #buttons.append({"title": name, "payload": '/ask_department_details_person{{"name":"'+name+'"}}'})
-            #buttons.append({"title": name, "payload": '/'+last_intent+'{"followup_names":"'+name+'"}'})
-            buttons.append({"title": name, "payload": '/'+last_intent+'SlotSet("slot_person_names", '+name+')'})
+            #buttons.append({"title": name, "payload": '/'+last_intent})
+            buttons.append({"title": name, "payload": '/'+last_intent+' {"slot_person_names": "'+name+'"}'})
 
         # display the buttons to the user
         message = "Please choose the name of the person you want to get information of:"
         dispatcher.utter_message(text=message, buttons=buttons)
 
-        
-        return [SlotSet("slot_person_names", names)]
-        #get button value selected
-        # payload = tracker.latest_message["text"]
-        
-        # print('payload', payload)
-        
-        # Retrigger the last intent with the button payload
-        # return [Restarted(), AllSlotsReset(), {"name": None, "trigger_message": {"type": "intent", "value": payload}}]
-        
+        selected_name = tracker.get_slot("slot_person_names")
+        print('selected_name', selected_name)
 
+        return []
+
+
+class retreiveNamesBasedOnDepartment(Action):
+    #1. Define the name of the action. This will be used in the stories , domain and in the endpoint.yml
+    def name(self) -> Text:
+        return "action_return_name_from_department"
+        # Can you give me all the details about JORGE
+    
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        try:
+           
+            print("Inside retreiveNamesBasedOnDepartment")
+            personName = next(tracker.get_latest_entity_values("person_names"), None)
+            print(f'person_names entity value: {personName}')
+            # get the names name from the slot
+            slot_name = tracker.get_slot('slot_person_names')
+            print(f'slot_name entity value: {slot_name}')
+
+            if(personName is None):
+                dispatcher.utter_message("I couldn't recognize who you are looking for. Can you please try with their full name?")
+                return []
+
+            try:
+                df = read_excel(file_path = file_path)
+                names = df[df.columns[0]].values.astype(str)
+                indexes, return_matched_names = return_matching_names(personName, names)
+                print(indexes)
+                print(return_matched_names)
+
+                # print(personName in df[df.columns[0]].values  == True)
+
+                if bool(len(indexes) == 1): #check if the person name is present in the excel sheet on first column
+                    # return index where personName is present in return_matched_names numpy array
+                        name= df[df.columns[0]].values[indexes][0]
+                        department= df[df.columns[1]].values[indexes][0]
+                        office_num = df[df.columns[2]].values[indexes][0]
+                        print(department)
+                        print(office_num)
+                  
+                        dispatcher.utter_message(name +' belongs to the department of : ' + str(department))
+                        return []
+
+                elif bool(len(indexes) > 1):
+                    dispatcher.utter_message('I have found more than one person with the name ' + personName)
+                    return [SlotSet("slot_person_names", return_matched_names), FollowupAction('action_choose_person_name')]
+                else:
+                    raise Exception('Person not found in database')
+    
+            except Exception as e:
+                print('error while reading excel: ',e)
+                dispatcher.utter_message("I'm sorry, there was an error while fetching from my records!")
+                return []
+       
+        except Exception as e:
+            print('error while reading excel',e)
+            dispatcher.utter_message("I'm sorry, I am facing trouble fetching information right now. Please try after sometime!")
+            return ['']
