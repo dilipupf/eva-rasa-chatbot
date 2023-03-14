@@ -11,6 +11,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 # Path to the lookup table file
 yml_filecreation_path = '../data/person_names.yml'
+yml_departments_path = '../data/departments.yml'
 excel_file_path = '../data/listado.xlsx'
 person_names = 'person_names' # name of the lookup table
 
