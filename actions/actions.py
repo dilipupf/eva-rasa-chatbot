@@ -221,7 +221,8 @@ class choosePersonNameFromMultipleOptions(Action):
             
             #buttons.append({"title": name, "payload": '/ask_department_details_person{{"name":"'+name+'"}}'})
             #buttons.append({"title": name, "payload": '/'+last_intent})
-            buttons.append({"title": name, "payload": '/'+last_intent+' {"slot_person_names": "'+name+'"}'})
+            buttons.append({"title": name, "payload": name})
+            # buttons.append({"title": name, "payload": '/'+last_intent+' {"slot_person_names": "'+name+'"}'})
 
         # display the buttons to the user
         message = "Please choose the name of the person you want to get information of:"
