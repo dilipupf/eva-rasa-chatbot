@@ -12,6 +12,7 @@ intents:
   - ask_general_info_person
   - ask_department_details_person
   - ask_office_details_person
+  - get_names_from_dept
 
 entites:
   - person_names
@@ -51,4 +52,4 @@ actions:
   - action_return_office_info_person
   - action_return_department_info_person
   - action_choose_person_name
-  - action_tell_time
+  - action_get_names_from_dept

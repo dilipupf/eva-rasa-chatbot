@@ -19,14 +19,36 @@ import os
 import pandas as pd
 import sys
 import numpy as np
-
+from fuzzywuzzy import fuzz
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 
 # Path to the custom scripts folder
 sys.path.append(os.path.join(os.getcwd(), 'custom_scripts'))
-from exceltodict import read_excel, return_matching_names
+from exceltodict import read_excel, return_matching_names, return_matching_names_from_dept
+
+def fuzzy_match_keywords(keywords, input_str, threshold=70):
+    """
+    Performs a fuzzy match of keywords in a list against an input string,
+    and returns a list of matching keywords that meet a specified threshold.
+
+    Parameters:
+        keywords (list): A list of keywords to match against.
+        input_str (str): The input string to match against the keywords.
+        threshold (int): The minimum fuzzy match score required to consider a match.
+                          Default is 70.
+
+    Returns:
+        List of matching keywords that meet the specified threshold.
+    """
+    matches = []
+    for keyword in keywords:
+        match_score = fuzz.partial_ratio(input_str.lower(), keyword.lower())
+        if match_score >= threshold:
+            matches.append(keyword)
+    return matches
+
 
 file_path = 'data/listado.xlsx'
 
@@ -237,55 +259,54 @@ class choosePersonNameFromMultipleOptions(Action):
 class retreiveNamesBasedOnDepartment(Action):
     #1. Define the name of the action. This will be used in the stories , domain and in the endpoint.yml
     def name(self) -> Text:
-        return "action_return_name_from_department"
+        return "action_get_names_from_dept"
         # Can you give me all the details about JORGE
     
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         try:
            
             print("Inside retreiveNamesBasedOnDepartment")
-            personName = next(tracker.get_latest_entity_values("person_names"), None)
-            print(f'person_names entity value: {personName}')
-            # get the names name from the slot
-            slot_name = tracker.get_slot('slot_person_names')
-            print(f'slot_name entity value: {slot_name}')
+            departmentName = next(tracker.get_latest_entity_values("department_names"), None)
+            print(f'departmentName entity value: {departmentName}')
+  
 
-            if(personName is None):
-                dispatcher.utter_message("I couldn't recognize who you are looking for. Can you please try with their full name?")
+            if(departmentName is None):
+                dispatcher.utter_message("I couldn't recognize who you department you are looking for. Can you please try again?")
                 return []
 
             try:
                 df = read_excel(file_path = file_path)
-                names = df[df.columns[0]].values.astype(str)
-                indexes, return_matched_names = return_matching_names(personName, names)
-                print(indexes)
-                print(return_matched_names)
+                departments = list(set(df[df.columns[1]].values.astype(str)))
+                # print('departments', departments)
 
-                # print(personName in df[df.columns[0]].values  == True)
+                return_matched_names = fuzzy_match_keywords(departments, departmentName)
+                print('return_matched_names', return_matched_names)
 
-                if bool(len(indexes) == 1): #check if the person name is present in the excel sheet on first column
-                    # return index where personName is present in return_matched_names numpy array
-                        name= df[df.columns[0]].values[indexes][0]
-                        department= df[df.columns[1]].values[indexes][0]
-                        office_num = df[df.columns[2]].values[indexes][0]
-                        print(department)
-                        print(office_num)
+                print(departmentName in df[df.columns[1]].values  == True)
+
+                # if bool(len(indexes) == 1): #check if the person name is present in the excel sheet on first column
+                #     # return index where personName is present in return_matched_names numpy array
+                #         name= df[df.columns[0]].values[indexes][0]
+                #         department= df[df.columns[1]].values[indexes][0]
+                #         office_num = df[df.columns[2]].values[indexes][0]
+                #         print(department)
+                #         print(office_num)
                   
-                        dispatcher.utter_message(name +' belongs to the department of : ' + str(department))
-                        return []
+                #         dispatcher.utter_message(name +' belongs to the department of : ' + str(department))
+                #         return []
 
-                elif bool(len(indexes) > 1):
-                    dispatcher.utter_message('I have found more than one person with the name ' + personName)
-                    return [SlotSet("slot_person_names", return_matched_names), FollowupAction('action_choose_person_name')]
-                else:
-                    raise Exception('Person not found in database')
+                # elif bool(len(indexes) > 1):
+                #     dispatcher.utter_message('I have found more than one person with the name ' + personName)
+                #     return [SlotSet("slot_person_names", return_matched_names), FollowupAction('action_choose_person_name')]
+                # else:
+                #     raise Exception('Person not found in database')
     
             except Exception as e:
-                print('error while reading excel: ',e)
+                print('error while retreiving names from dept: ',e)
                 dispatcher.utter_message("I'm sorry, there was an error while fetching from my records!")
                 return []
        
         except Exception as e:
-            print('error while reading excel',e)
+            print('error while retreiving names from dept',e)
             dispatcher.utter_message("I'm sorry, I am facing trouble fetching information right now. Please try after sometime!")
             return ['']

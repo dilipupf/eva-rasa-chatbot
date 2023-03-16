@@ -39,6 +39,29 @@ def return_matching_names(personName, names):
     filtered_names = names[indexes].tolist()
     return [indexes, filtered_names]
 
+
+def return_matching_names_from_dept(deptName, dept_names):
+    indexes = []
+
+    exact_match_index = np.where(dept_names == deptName)[0]
+    if len(exact_match_index) > 0:
+        indexes = exact_match_index
+        return [indexes, dept_names[indexes]]
+
+    for pos, name in enumerate(dept_names):
+        start = 0
+        while True:
+            index = np.char.find(name, deptName, start)
+            if index == -1:
+                break
+            else:
+                indexes.append(pos)
+            start = index + 1
+    # filtered neams from the list of indexes and convert to list from numpy array so that it can be passed
+    # to serialize in slotset function later.
+    filtered_names = dept_names[indexes].tolist()
+    return [indexes, filtered_names]
+
 # if __name__ == '__main__':  
 #     try:
 #         df = excel_to_dict.read_excel('../data/listado.xlsx')

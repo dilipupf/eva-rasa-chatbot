@@ -79,7 +79,7 @@ def lookup_table_conversion():
                 
                 for dept in departments:
                         write_to_yml_file(dept)
-                        # [write_to_yml_file(each_word_of_name) for each_word_of_name in dept.split(' ')]
+                        [write_to_yml_file(each_word_of_name) for each_word_of_name in dept.split(':')]
         
         
         

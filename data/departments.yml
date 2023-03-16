@@ -2,37 +2,94 @@ version: "2.0"
 nlu:
   - lookup: department_names
     examples: |
-      - UGA TIC- Polytechnic School Coordinator 
-      - UGA TIC- Polytechnic School
-      - UBICALAB: Ubiquitous Computing Applications Lab
-      - TALN: Natural Language Processing
       - BERG Biomedical Electronics Research Group
-      - Research Service 
-      - MTG: Music Technology Group
-      - SIMBIOsys: Simulation, Imaging and Modelling for Biomedical Systems
-      - WN: Wireless Networking Group
-      - UGA TIC: Research, Promotion & Activities
-      - UGA TIC- Recruitment , Docorate & International ETIC
-      - NTSA: Nonlinear Time Series Analysis Group
-      - UGA TIC: Research, Promotion & Activities Coordinator
+      - BERG Biomedical Electronics Research Group
+      - UGA TIC- Recruitment , Doctorate & International ETIC
+      - UGA TIC- Recruitment , Doctorate & International ETIC
+      - UGA TIC - Pedagogue in USQUID
       - UGA TIC - Pedagogue in USQUID
       - TALN; Natural Language Processing
-      - IP4EC Image processing for enhanced cinematography
-      - UGA TIC- Recruitment , Doctorate & International ETIC
-      - AI&ML: Artificial Intelligence and Machine Learning group
-      - ITC: Information Theory and Coding Group
-      - IPG: Image Processing Group/ MTG: Music Technology Group
-      - Physense: Sensing in Physiology and Biomedicine Group
-      - IPG: Image Processing Group
-      - NETS Network Technologies and Strategies Group
-      - CMTECH: Cognitive Media Technologies Group
-      - UGA TIC Head of the Management and Administration  Unit
+      - TALN; Natural Language Processing
+      - UGA TIC: Research, Promotion & Activities
+      - UGA TIC
+      -  Research, Promotion & Activities
+      - MTG: Music Technology Group
+      - MTG
+      -  Music Technology Group
       - Computational Neuroscience
-      - ITG: Interactive Technologies Group
-      - Natural Language Processing
-      - IPG: Image Processing Group /MTG: Music Technology Group
+      - Computational Neuroscience
+      - UGA TIC- Recruitment , Docorate & International ETIC
+      - UGA TIC- Recruitment , Docorate & International ETIC
       - UGA TIC- Recruitment , Docorate & International ETIC Coordinator 
-      - TIDE: Interactive & Distributed Technologies for Education
-      - MTG: Music Technology Group / PHONOS
-      - WSSC: Web Science and Social Computing
+      - UGA TIC- Recruitment , Docorate & International ETIC Coordinator 
+      - WN: Wireless Networking Group
+      - WN
+      - Wireless Networking Group
       - CMTECH: Cognitive Media Technologies Group /MTG: Music Technology Group
+      - CMTECH
+      - Cognitive Media Technologies Group /MTG
+      - Music Technology Group
+      - TIDE: Interactive & Distributed Technologies for Education
+      - TIDE
+      -  Interactive & Distributed Technologies for Education
+      - Physense: Sensing in Physiology and Biomedicine Group
+      - Physense
+      -  Sensing in Physiology and Biomedicine Group
+      - WSSC: Web Science and Social Computing
+      - WSSC
+      -  Web Science and Social Computing
+      - NETS Network Technologies and Strategies Group
+      - NETS Network Technologies and Strategies Group
+      - IPG: Image Processing Group /MTG: Music Technology Group
+      - IPG
+      -  Image Processing Group /MTG
+      -  Music Technology Group
+      - ITC: Information Theory and Coding Group
+      - ITC
+      -  Information Theory and Coding Group
+      - Research Service 
+      - Research Service 
+      - ITG: Interactive Technologies Group
+      - ITG
+      -  Interactive Technologies Group
+      - UGA TIC- Polytechnic School
+      - UGA TIC- Polytechnic School
+      - Natural Language Processing
+      - Natural Language Processing
+      - TALN: Natural Language Processing
+      - TALN
+      -  Natural Language Processing
+      - UBICALAB: Ubiquitous Computing Applications Lab
+      - UBICALAB
+      -  Ubiquitous Computing Applications Lab
+      - IPG: Image Processing Group
+      - IPG
+      -  Image Processing Group
+      - CMTECH: Cognitive Media Technologies Group
+      - CMTECH
+      -  Cognitive Media Technologies Group
+      - AI&ML: Artificial Intelligence and Machine Learning group
+      - AI&ML
+      -  Artificial Intelligence and Machine Learning group
+      - UGA TIC Head of the Management and Administration  Unit
+      - UGA TIC Head of the Management and Administration  Unit
+      - NTSA: Nonlinear Time Series Analysis Group
+      - NTSA
+      -  Nonlinear Time Series Analysis Group
+      - SIMBIOsys: Simulation, Imaging and Modelling for Biomedical Systems
+      - SIMBIOsys
+      -  Simulation, Imaging and Modelling for Biomedical Systems
+      - IP4EC Image processing for enhanced cinematography
+      - IP4EC Image processing for enhanced cinematography
+      - UGA TIC- Polytechnic School Coordinator 
+      - UGA TIC- Polytechnic School Coordinator 
+      - MTG: Music Technology Group / PHONOS
+      - MTG
+      -  Music Technology Group / PHONOS
+      - IPG: Image Processing Group/ MTG: Music Technology Group
+      - IPG
+      -  Image Processing Group/ MTG
+      -  Music Technology Group
+      - UGA TIC: Research, Promotion & Activities Coordinator
+      - UGA TIC
+      -  Research, Promotion & Activities Coordinator

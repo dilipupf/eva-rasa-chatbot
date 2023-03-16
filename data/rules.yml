@@ -11,7 +11,7 @@ rules:
       - intent: bot_challenge
       - action: utter_iamabot
 
-  - rule: Tell the time
+  - rule: Get Names of People using department names
     steps:
-      - intent: inquire_time
-      - action: action_tell_time # this is the custom action which should be configured in domain.yml file
+      - intent: get_names_from_dept
+      - action: action_get_names_from_dept # this is the custom action which should be configured in domain.yml file
