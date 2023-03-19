@@ -90,21 +90,11 @@ nlu:
       - I need information about [MARCO JEROME GASPARRINI] (person_names)
       - I require some general information about [Jorge LOBO](person_names)
       - I need information regarding [GERGELY NEU](person_names)
-  - intent: ask_office_details_person
-    examples: |
-      - Where is the office of [Jorge Lobo] (person_names)
-      - Can you give me office number of [ANDERS JONSSON](person_names)
-      - Where does [MARCO JEROME GASPARRINI] (person_names) sit?
-      - I need the office details of [Jorge LOBO](person_names)
   - intent: ask_department_details_person
     examples: |
       - Which department does [Jorge Lobo] (person_names) belong to?
       - Can you give me department of [ANDERS JONSSON](person_names)
       - I need the department details of [Jorge LOBO](person_names)
-  - intent: ask_office_details
-    examples: |
-      - I would like to know to where the dtic faculty rooms are
-      - Where can i find the office of a dtic faculty
   - intent: get_names_from_dept
     examples: |
       - How many faculty does the [UGA TIC- Polytechnic School Coordinator](department_names) department have?
@@ -113,3 +103,10 @@ nlu:
   - intent: find_office_room_number_of
       - Who sits in the office room number [55215](office_numbers)
       - To whom does the office number belong to [53210](office_numbers)
+      - Which person sits in the office number [55215](office_numbers)
+   - intent: ask_office_details_person
+    examples: |
+      - Where is the office of [Jorge Lobo] (person_names)
+      - Can you give me office number of [ANDERS JONSSON](person_names)
+      - Where does [MARCO JEROME GASPARRINI] (person_names) sit?
+      - I need the office details of [Jorge LOBO](person_names)

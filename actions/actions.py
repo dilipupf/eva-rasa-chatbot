@@ -214,11 +214,6 @@ class choosePersonNameFromMultipleOptions(Action):
         last_intent = latest_message['intent']['name']
         print('last intent is: ', last_intent)
 
-        # # Set the slot value to the selected button value
-        # selected_button = tracker.latest_message['text']
-        # dispatcher.utter_message(text=f"You selected {selected_button}.")
-        # return [SlotSet("slot_person_names", selected_button)]
-    
         # create a list of buttons with the names as options
         buttons = []
         for name in names:
@@ -273,10 +268,23 @@ class retreiveNamesBasedOnDepartment(Action):
                 departments = list(set(df[df.columns[1]].values.astype(str)))
           
 
-                return_matched_names = fuzzy_match_keywords(departments, departmentName)
+                return_matched_names = fuzzy_match_keywords(departments, departmentName, threshold = 95)
                 print('return_matched_names', return_matched_names)
 
+                # count number of row in the dpartment column where the department name is present by looping through the return_matched_names list
+                count = 0
+                for name in return_matched_names:
+                    count += len(df[df[df.columns[1]] == name].index)
 
+                print('count', count)
+
+
+                if count >= 0:
+  
+                    dispatcher.utter_message('Number of people in the department of '+return_matched_names[0]+ 'are: ' + str(count))
+                    return []
+
+                
     
             except Exception as e:
                 print('error while retreiving names from dept: ',e)
@@ -312,7 +320,7 @@ class retreiveNamesBasedOnOffice(Action):
                 officenumbers = list(set(df[df.columns[2]].values.astype(str)))
                 # print('departments', departments)
 
-                return_matched_names = fuzzy_match_keywords(officenumbers, officeNumber)
+                return_matched_names = fuzzy_match_keywords(officenumbers, officeNumber, threshold=90)
                 print('return_matched_names', return_matched_names)
 
                 print(officeNumber in df[df.columns[1]].values  == True)
