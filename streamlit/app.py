@@ -79,8 +79,8 @@ if __name__ == '__main__':
             st.write(ans)
             # st.write(f'Last submission: {st.session_state.stored_input_text}')
         # Display bot response
-        st.session_state.past.append(st.session_state.stored_input_text)
-        st.session_state.generated.append(ans)
+        st.session_state.past.insert(0, st.session_state.stored_input_text)
+        st.session_state.generated.insert(0, ans)
         # st.session_state.my_text_input = ''
 
     print(st.session_state)
