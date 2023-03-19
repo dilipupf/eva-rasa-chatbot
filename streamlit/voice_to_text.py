@@ -112,7 +112,7 @@ class STT:
         self.recordingSampleRate = _recordingSampleRate
         self.recordingDurationSec = _recordingDurationSec
         self.setUserLanguage(_userLanguage)
-        self.whisperModel = whisper.load_model('base') # executed only 1st time this python script is run
+        self.whisperModel = whisper.load_model('small') # executed only 1st time this python script is run
         self.recordedFileName = 'input.wav'
 
     def setUserLanguage(self, _userLanguage):

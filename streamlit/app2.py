@@ -61,9 +61,9 @@ if __name__ == '__main__':
     if "_get_last_key_pressed" not in st.session_state:
         st.session_state._get_last_key_pressed = None
 
-    record_button = st.sidebar.button('Record speech')
-    user_language = st.sidebar.selectbox('Language to translate from:', whisper_languages_list)
-    recording_duration = st.sidebar.selectbox('Recording duration in secs:', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    record_button = st.sidebar.button('Start speech recording')
+    user_language = st.sidebar.selectbox('User language:', whisper_languages_list)
+    recording_duration = st.sidebar.selectbox('Recording duration in seconds:', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
     user_input = st.text_input("Enter some text", key="my_text_input")
 
