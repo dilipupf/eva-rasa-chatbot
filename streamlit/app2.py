@@ -5,6 +5,7 @@ import json
 import uuid
 from voice_to_text import STT
 from voice_to_text import LANGUAGES
+from text_to_voice import text_to_audio
 
 # Generate unique key for widget
 widget_key = str(uuid.uuid4())
@@ -81,6 +82,7 @@ if __name__ == '__main__':
 
     if user_input:
         ans, button_response = predict(user_input)
+        text_to_audio("en-GB-Neural2-A", ans)
         if button_response:
             button_message = button_response['text']
             buttons = button_response['buttons']
