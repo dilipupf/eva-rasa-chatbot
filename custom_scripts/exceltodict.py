@@ -19,7 +19,7 @@ def read_excel(file_path,  no_of_cols = [0,1,2]):
 
 def return_matching_names(personName, names):
     indexes = []
-
+    personName = personName.upper()
     exact_match_index = np.where(names == personName)[0]
     if len(exact_match_index) > 0:
         indexes = exact_match_index

@@ -87,7 +87,7 @@ class retreiveFacultyDetails(Action):
                         print(department)
                         print(office_num)
                   
-                        dispatcher.utter_message('I have found the following details for you about ' + personName +'./n'
+                        dispatcher.utter_message('I have found the following details for you about ' + return_matched_names[0] +'./n'
                         + 'Department: ' + str(department) + '/n' + 'Office Number: ' + str(office_num))
                         return []
 
@@ -195,7 +195,7 @@ class retreiveOfficeDetails(Action):
                         office_num = df[df.columns[2]].values[indexes][0]
                         print(office_num)
                   
-                        dispatcher.utter_message(personName +' sits in the office number: ' + str(office_num))
+                        dispatcher.utter_message(return_matched_names[0] +' sits in the office number: ' + str(office_num))
                         return []
 
                 elif bool(len(indexes) > 1):

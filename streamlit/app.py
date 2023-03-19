@@ -53,26 +53,35 @@ if __name__ == '__main__':
 
     if "_get_last_key_pressed" not in st.session_state:
         st.session_state._get_last_key_pressed = None
+    
+    if 'stored_input_text' not in st.session_state:
+        st.session_state.stored_input_text = ''
 
-    user_input = st.text_input("Enter some text", key="my_text_input")
+    def submit():
+        st.session_state.stored_input_text = st.session_state.my_text_input
+        st.session_state.my_text_input = ''
 
-    if user_input:
-        ans, button_response = predict(user_input)
+
+    user_input = st.text_input("Enter some text", key="my_text_input", on_change = submit)
+
+    if st.session_state.stored_input_text:
+        ans, button_response = predict(st.session_state.stored_input_text)
         if button_response:
             button_message = button_response['text']
             buttons = button_response['buttons']
+            st.write(ans)
             st.write(button_message)
             for index, button in enumerate(buttons):
                 button_value = st.button(button['title'], key=button['payload'])
-                user_input = button_value
-                print('user input', user_input)
+                st.session_state.stored_input_text = button_value
+                print('st.session_state.stored_input_text', st.session_state.stored_input_text)
         else:
             st.write(ans)
-
+            # st.write(f'Last submission: {st.session_state.stored_input_text}')
         # Display bot response
-        st.session_state.past.append(user_input)
+        st.session_state.past.append(st.session_state.stored_input_text)
         st.session_state.generated.append(ans)
-
+        # st.session_state.my_text_input = ''
 
     print(st.session_state)
     
