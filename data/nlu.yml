@@ -107,6 +107,9 @@ nlu:
       - Where can i find the office of a dtic faculty
   - intent: get_names_from_dept
     examples: |
-      - What is the name of the faculty in the department of [UGA TIC- Polytechnic School Coordinator](department_names)
-      - I need the names of the faculty in the department of [WN: Wireless Networking Group](department_names)
-      - Can you give me the names of the faculty in the department of [MTG: Music Technology Group / PHONOS](department_names)
+      - How many faculty does the [UGA TIC- Polytechnic School Coordinator](department_names) department have?
+      - What is the number of people in the department of [WN: Wireless Networking Group](department_names)
+      - How many people does the [MTG: Music Technology Group / PHONOS](department_names) have?
+  - intent: find_office_room_number_of
+      - Who sits in the office room number [55215](office_numbers)
+      - To whom does the office number belong to [53210](office_numbers)

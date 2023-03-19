@@ -3,6 +3,8 @@ import requests
 from streamlit_chat import message
 import json
 import uuid
+from voice_to_text import STT
+from voice_to_text import LANGUAGES
 
 # Generate unique key for widget
 widget_key = str(uuid.uuid4())
@@ -43,6 +45,11 @@ def display_button_message(response):
         st.button(button['title'])
 
 if __name__ == '__main__':
+    sttModule = STT(8000, 5, 'english')
+    whisper_languages_list = []
+    for key in LANGUAGES:
+        whisper_languages_list.append(LANGUAGES[key])
+
     st.header('Eva Rasa Chatbot')
 
     if 'generated' not in st.session_state:
@@ -53,7 +60,7 @@ if __name__ == '__main__':
 
     if "_get_last_key_pressed" not in st.session_state:
         st.session_state._get_last_key_pressed = None
-    
+
     if 'stored_input_text' not in st.session_state:
         st.session_state.stored_input_text = ''
 
@@ -61,14 +68,28 @@ if __name__ == '__main__':
         st.session_state.stored_input_text = st.session_state.my_text_input
         st.session_state.my_text_input = ''
 
+    record_button = st.sidebar.button('Start speech recording')
+    user_language = st.sidebar.selectbox('User language:', whisper_languages_list)
+    # set default recording duration to 5 seconds
+    
+    recording_duration = st.sidebar.selectbox('Recording duration in seconds:', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], index = 4)
 
     user_input = st.text_input("Enter some text", key="my_text_input", on_change = submit)
 
+    if record_button:
+        with st.spinner('Recording...'):
+            sttModule.recordMicAudio_ToWavFile()
+        with st.spinner('Translating and transcribing...'):
+            user_input = sttModule.translateAndTranscribe_FromWavFile()
+ 
+    if user_language:
+        sttModule.setUserLanguage(user_language)
 
-
+    if recording_duration:
+        sttModule.setRecordingDuration(recording_duration)
 
     if st.session_state.stored_input_text:
-        ans, button_response = predict(st.session_state.stored_input_text)
+        ans, button_response = predict(st.session_state.stored_input_text) 
         if button_response:
             button_message = button_response['text']
             buttons = button_response['buttons']
@@ -76,15 +97,15 @@ if __name__ == '__main__':
             for index, button in enumerate(buttons):
                 button_value = st.button(button['title'], key=button['payload'])
                 st.session_state.stored_input_text = button_value
-                ans, button_response = predict(st.session_state.stored_input_text)
-                st.write(ans)
-                # print('st.session_state.stored_input_text', st.session_state.stored_input_text)
+                print('st.session_state.stored_input_text', st.session_state.stored_input_text)
         else:
             st.write(ans)
-            # st.write(f'Last submission: {st.session_state.stored_input_text}')
+
         # Display bot response
         st.session_state.past.insert(0, st.session_state.stored_input_text)
         st.session_state.generated.insert(0, ans)
+
+
     print(st.session_state)
     
     for i in range(len(st.session_state['past'])):

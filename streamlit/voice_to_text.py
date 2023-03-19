@@ -1,19 +1,160 @@
 import ssl # disable ssl checking
 import whisper
 ssl._create_default_https_context = ssl._create_unverified_context
+import sounddevice as sd
+from scipy.io.wavfile import write
 
+# from https://github.com/openai/whisper/blob/main/whisper/tokenizer.py
+LANGUAGES = {
+    "en": "english",
+    "zh": "chinese",
+    "de": "german",
+    "es": "spanish",
+    "ru": "russian",
+    "ko": "korean",
+    "fr": "french",
+    "ja": "japanese",
+    "pt": "portuguese",
+    "tr": "turkish",
+    "pl": "polish",
+    "ca": "catalan",
+    "nl": "dutch",
+    "ar": "arabic",
+    "sv": "swedish",
+    "it": "italian",
+    "id": "indonesian",
+    "hi": "hindi",
+    "fi": "finnish",
+    "vi": "vietnamese",
+    "he": "hebrew",
+    "uk": "ukrainian",
+    "el": "greek",
+    "ms": "malay",
+    "cs": "czech",
+    "ro": "romanian",
+    "da": "danish",
+    "hu": "hungarian",
+    "ta": "tamil",
+    "no": "norwegian",
+    "th": "thai",
+    "ur": "urdu",
+    "hr": "croatian",
+    "bg": "bulgarian",
+    "lt": "lithuanian",
+    "la": "latin",
+    "mi": "maori",
+    "ml": "malayalam",
+    "cy": "welsh",
+    "sk": "slovak",
+    "te": "telugu",
+    "fa": "persian",
+    "lv": "latvian",
+    "bn": "bengali",
+    "sr": "serbian",
+    "az": "azerbaijani",
+    "sl": "slovenian",
+    "kn": "kannada",
+    "et": "estonian",
+    "mk": "macedonian",
+    "br": "breton",
+    "eu": "basque",
+    "is": "icelandic",
+    "hy": "armenian",
+    "ne": "nepali",
+    "mn": "mongolian",
+    "bs": "bosnian",
+    "kk": "kazakh",
+    "sq": "albanian",
+    "sw": "swahili",
+    "gl": "galician",
+    "mr": "marathi",
+    "pa": "punjabi",
+    "si": "sinhala",
+    "km": "khmer",
+    "sn": "shona",
+    "yo": "yoruba",
+    "so": "somali",
+    "af": "afrikaans",
+    "oc": "occitan",
+    "ka": "georgian",
+    "be": "belarusian",
+    "tg": "tajik",
+    "sd": "sindhi",
+    "gu": "gujarati",
+    "am": "amharic",
+    "yi": "yiddish",
+    "lo": "lao",
+    "uz": "uzbek",
+    "fo": "faroese",
+    "ht": "haitian creole",
+    "ps": "pashto",
+    "tk": "turkmen",
+    "nn": "nynorsk",
+    "mt": "maltese",
+    "sa": "sanskrit",
+    "lb": "luxembourgish",
+    "my": "myanmar",
+    "bo": "tibetan",
+    "tl": "tagalog",
+    "mg": "malagasy",
+    "as": "assamese",
+    "tt": "tatar",
+    "haw": "hawaiian",
+    "ln": "lingala",
+    "ha": "hausa",
+    "ba": "bashkir",
+    "jw": "javanese",
+    "su": "sundanese",
+}
 
-def main():
-    print('Executing')
+class STT:
+    def __init__(self, _recordingSampleRate, _recordingDurationSec, _userLanguage) -> None:
+        self.recordingSampleRate = _recordingSampleRate
+        self.recordingDurationSec = _recordingDurationSec
+        self.setUserLanguage(_userLanguage)
+        self.whisperModel = whisper.load_model('small') # executed only 1st time this python script is run
+        self.recordedFileName = 'input.wav'
 
-    model = whisper.load_model('base') # executed only 1st time this python script is run
+    def setUserLanguage(self, _userLanguage):
+        isUserLanguageLegal = False
+        for key in LANGUAGES.keys():
+            if LANGUAGES[key] == _userLanguage:
+                self.userLanguage = _userLanguage
+                isUserLanguageLegal = True 
+                print(f'Set new user language to: {self.userLanguage}')
+                break
+        if not isUserLanguageLegal:
+            self.userLanguage = 'english'
+            print('Please provide a valid whisper language. self.userLanguage set to english')
 
-    # result = model.transcribe('english-speech.wav', fp16 = False) 
-    # result = whisper.transcribe(model = model, audio = 'hindi-speech.mp3', fp16 = False, task = 'translate', language = 'ur')
-    result = whisper.transcribe(model = model, audio = 'italian-speech.flac', fp16 = False, task = 'translate', language = 'it')
+    def setRecordingDuration(self, _recordingDuration):
+        if isinstance(_recordingDuration, int):
+            self.recordingDurationSec = _recordingDuration
+            print(f'Recording duration set to {self.recordingDurationSec} secs')
 
-    # list of languages andsupported for translation and identifiers https://github.com/openai/whisper/blob/main/whisper/tokenizer.py
-    print(result['text'])
+    def recordMicAudio_ToWavFile(self):
+        print('Recording...')
+        myrecording = sd.rec(int(self.recordingDurationSec * self.recordingSampleRate), samplerate = self.recordingSampleRate, channels=1)
+        sd.wait()  # Wait until recording is finished
+        write(self.recordedFileName, self.recordingSampleRate, myrecording)  # Save as WAV file
+        print('Finished recording...')
 
-if __name__ == '__main__':
-    main()
+    def translateAndTranscribe_FromWavFile(self):
+        result = whisper.transcribe(model = self.whisperModel, audio = self.recordedFileName, fp16 = False, task = 'translate', language = self.userLanguage)
+
+        textResult = result['text']
+        print(f'Translation and transcription result: {textResult}')
+        return textResult
+
+    def translateAndTranscribe_FromMicAudio(self):
+        print('Recording...')
+        myrecording = sd.rec(int(self.recordingDurationSec * self.recordingSampleRate), samplerate = self.recordingSampleRate, channels=1)
+        sd.wait()  # Wait until recording is finished
+        write(self.recordedFileName, self.recordingSampleRate, myrecording)  # Save as WAV file
+        print('Finished recording...')
+
+        result = whisper.transcribe(model = self.whisperModel, audio = self.recordedFileName, fp16 = False, task = 'translate', language = self.userLanguage)
+
+        textResult = result['text']
+        print(f'Translation and transcription result: {textResult}')
+        return textResult

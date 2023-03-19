@@ -12,10 +12,36 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 # Path to the lookup table file
 yml_filecreation_path = '../data/person_names.yml'
 yml_departments_path = '../data/departments.yml'
+yml_office_numbers_path = '../data/officenumbers.yml'
 excel_file_path = '../data/listado.xlsx'
 person_names = 'person_names' # name of the lookup table
 department_names = 'department_names'
+office_numbers = 'office_numers'
 
+def generate_all_possible_names(input_string):
+    """
+    Generates all possible names by adding or removing single characters from the input string.
+
+    Parameters:
+    input_string (str): The input string to generate possible names from.
+
+    Returns:
+    list: A list of all possible names generated from the input string.
+    """
+
+    # Initialize list with input string
+    possible_names = [input_string]
+
+    # Add all possible names with one character added
+    for i in range(len(input_string)):
+        for letter in 'abcdefghijklmnopqrstuvwxyz':
+            possible_names.append(input_string[:i+1] + letter + input_string[i+1:])
+
+    # Add all possible names with one character removed
+    for i in range(len(input_string)):
+        possible_names.append(input_string[:i] + input_string[i+1:])
+
+    return possible_names
 
 
 
@@ -37,6 +63,7 @@ def lookup_table_conversion():
 
         df = pd.read_excel(excel_file_path)
         department_column = df[df.columns[1]]
+        office_column = df[df.columns[2]]
         #include the first column from the excel file
         df = df[df.columns[0]]
        
@@ -58,7 +85,8 @@ def lookup_table_conversion():
         departments = get_departments(department_column)
 
 
-        #Write the YAML string to a file in the lookup_tables folder the way the rasa docs say to do it
+        
+        ##Write the YAML string to a file in the lookup_tables folder the way the rasa docs say to do it
         # with open(yml_filecreation_path, 'w') as outfile:
 
         #         def write_to_yml_file(name):
@@ -69,19 +97,30 @@ def lookup_table_conversion():
         #         for full_name in data_list:
         #                 write_to_yml_file(full_name)
         #                 [write_to_yml_file(each_word_of_name) for each_word_of_name in full_name.split(' ')]
+        #                 [write_to_yml_file(each_possible_name) for each_possible_name in generate_all_possible_names(full_name)]
                
-        with open(yml_departments_path, 'w') as outdeptfile:
+        # with open(yml_departments_path, 'w') as outdeptfile:
+
+        #         def write_to_yml_file(name):
+        #                 outdeptfile.write("\n      - " + name)
+
+        #         outdeptfile.write("\nversion: \"2.0\"\nnlu:\n  - lookup: "+department_names+"\n    examples: |")
+                
+        #         for dept in departments:
+        #                 write_to_yml_file(dept)
+        #                 [write_to_yml_file(each_word_of_name) for each_word_of_name in dept.split(':')]
+
+        with open(yml_office_numbers_path, 'w') as outofficeNumfile:
 
                 def write_to_yml_file(name):
-                        outdeptfile.write("\n      - " + name)
+                        # convert name from float to str
+                        name = str(name)
+                        outofficeNumfile.write("\n      - " + name)
 
-                outdeptfile.write("\nversion: \"2.0\"\nnlu:\n  - lookup: "+department_names+"\n    examples: |")
+                outofficeNumfile.write("\nversion: \"2.0\"\nnlu:\n  - lookup: "+office_numbers+"\n    examples: |")
                 
-                for dept in departments:
-                        write_to_yml_file(dept)
-                        [write_to_yml_file(each_word_of_name) for each_word_of_name in dept.split(':')]
-        
-        
+                for offnum in office_column:
+                        write_to_yml_file(offnum)
         
         print('finished lookuptable conversion')
 

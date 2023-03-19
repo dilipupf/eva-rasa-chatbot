@@ -3,6 +3,7 @@ import random
 import numpy as np
 import re
 import exceltodict as excel_to_dict
+from fuzzywuzzy import fuzz
 from reformat_excel import get_dataframe_with_reformatted_names
 
 # Read the data from the excel file and convert to dictionary format
@@ -38,6 +39,14 @@ def return_matching_names(personName, names):
     # to serialize in slotset function later.
     filtered_names = names[indexes].tolist()
     return [indexes, filtered_names]
+
+def fuzzy_match_keywords(keywords, input_str, threshold=70):
+    matches = []
+    for keyword in keywords:
+        match_score = fuzz.partial_ratio(input_str.lower(), keyword.lower())
+        if match_score >= threshold:
+            matches.append(keyword)
+    return matches
 
 
 def return_matching_names_from_dept(deptName, dept_names):
