@@ -8,6 +8,9 @@ from voice_to_text import LANGUAGES
 from text_to_voice import text_to_audio
 from IPython.display import Audio
 from playsound import playsound
+from streamlit_player import st_player
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 # Generate unique key for widget
 widget_key = str(uuid.uuid4())
@@ -17,6 +20,8 @@ widget_key = str(uuid.uuid4())
 
 URL = "http://localhost:5005/webhooks/rest/webhook"
 
+
+   
 
 def predict(text):
 
@@ -103,11 +108,8 @@ if __name__ == '__main__':
 
         file_name_path = text_to_audio("en-GB-Neural2-A", str(ans))
         # Audio(filename = file_name_path, autoplay = True)
-
-        # audio_file = open('response.mp3', 'rb')
-        # audio_bytes = audio_file.read()
-
-        playsound('response.mp3')
+        print('file_name_path', file_name_path)
+        st.audio(file_name_path)
 
 
 

@@ -58,6 +58,19 @@ def get_departments(dep_column):
         print('departments', departments)
         return departments
 
+def generate_similar_permutations_of_string(word):
+        list_of_new_names = []
+        counter = 0
+        for each_character_of_word in word:
+                new_name = word[:counter]
+                new_name += (each_character_of_word)
+                new_name += (word[counter:])
+                list_of_new_names.append(new_name)
+                counter += 1
+        return list_of_new_names
+
+# data_list = ['MATTEO FABBRI', 'DILIP HARISH']
+
 
 def lookup_table_conversion():
 
@@ -83,22 +96,33 @@ def lookup_table_conversion():
         # print(data_list[:5])
 
         departments = get_departments(department_column)
-
+        
+        # list_of_new_names = []
+        # for name in data_list:
+        #         list_of_new_names += generate_similar_permutations_of_string(name)
+        # for full_name in data_list:
+        #         for each_word_of_name in full_name.split(' '):
+        #                 list_of_new_names += generate_similar_permutations_of_string(each_word_of_name)       
+        
+        # print(list_of_new_names)
 
         
-        ##Write the YAML string to a file in the lookup_tables folder the way the rasa docs say to do it
-        # with open(yml_filecreation_path, 'w') as outfile:
+        #Write the YAML string to a file in the lookup_tables folder the way the rasa docs say to do it
+        with open(yml_filecreation_path, 'w') as outfile:
 
-        #         def write_to_yml_file(name):
-        #                 outfile.write("\n      - " + name)
+                def write_to_yml_file(name):
+                        outfile.write("\n      - " + str(name))
 
-        #         outfile.write("\nversion: \"2.0\"\nnlu:\n  - lookup: "+person_names+"\n    examples: |")
+                outfile.write("\nversion: \"2.0\"\nnlu:\n  - lookup: "+person_names+"\n    examples: |")
                 
-        #         for full_name in data_list:
-        #                 write_to_yml_file(full_name)
-        #                 [write_to_yml_file(each_word_of_name) for each_word_of_name in full_name.split(' ')]
-        #                 [write_to_yml_file(each_possible_name) for each_possible_name in generate_all_possible_names(full_name)]
-               
+                for full_name in data_list:
+                        # write_to_yml_file(full_name)
+                        [write_to_yml_file(name) for name in generate_similar_permutations_of_string(full_name)]
+                        # [write_to_yml_file(each_word_of_name) for each_word_of_name in full_name.split(' ')]
+                        for full_name_edited in generate_similar_permutations_of_string(full_name):
+                                [write_to_yml_file(each_word_of_name) for each_word_of_name in full_name_edited.split(' ') if each_word_of_name != '']
+                                
+        
         # with open(yml_departments_path, 'w') as outdeptfile:
 
         #         def write_to_yml_file(name):
@@ -110,17 +134,17 @@ def lookup_table_conversion():
         #                 write_to_yml_file(dept)
         #                 [write_to_yml_file(each_word_of_name) for each_word_of_name in dept.split(':')]
 
-        with open(yml_office_numbers_path, 'w') as outofficeNumfile:
+        # with open(yml_office_numbers_path, 'w') as outofficeNumfile:
 
-                def write_to_yml_file(name):
-                        # convert name from float to str
-                        name = str(name)
-                        outofficeNumfile.write("\n      - " + name)
+        #         def write_to_yml_file(name):
+        #                 # convert name from float to str
+        #                 name = str(name)
+        #                 outofficeNumfile.write("\n      - " + name)
 
-                outofficeNumfile.write("\nversion: \"2.0\"\nnlu:\n  - lookup: "+office_numbers+"\n    examples: |")
+        #         outofficeNumfile.write("\nversion: \"2.0\"\nnlu:\n  - lookup: "+office_numbers+"\n    examples: |")
                 
-                for offnum in office_column:
-                        write_to_yml_file(offnum)
+        #         for offnum in office_column:
+        #                 write_to_yml_file(offnum)
         
         print('finished lookuptable conversion')
 

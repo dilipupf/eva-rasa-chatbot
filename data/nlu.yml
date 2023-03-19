@@ -101,10 +101,11 @@ nlu:
       - What is the number of people in the department of [WN: Wireless Networking Group](department_names)
       - How many people does the [MTG: Music Technology Group / PHONOS](department_names) have?
   - intent: find_office_room_number_of
+    examples: |
       - Who sits in the office room number [55215](office_numbers)
       - To whom does the office number belong to [53210](office_numbers)
       - Which person sits in the office number [55215](office_numbers)
-   - intent: ask_office_details_person
+  - intent: ask_office_details_person
     examples: |
       - Where is the office of [Jorge Lobo] (person_names)
       - Can you give me office number of [ANDERS JONSSON](person_names)
